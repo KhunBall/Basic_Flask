@@ -7,6 +7,19 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>ยินดีต้อนรับเข้าสู่หน้า Admin</h1>
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/admin">Admin</a></li>
+    </ul>
+
+    {% if username == "KhunBall" %}
+        <h1>ยินดีต้อนรับเข้าสู่หน้า Admin</h1>
+        <img src="../static/picture2.jpg"  alt="" srcset="">
+    {% else %}
+        <h1>คุณไม่ใช้ Admin</h1>
+        <p>กรุณากลับหน้าแรก</p>
+        <a href="/">Home</a>
+    {% endif %}
 </body>
 </html>
