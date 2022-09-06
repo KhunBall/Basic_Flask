@@ -1,25 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="/admin">Admin</a></li>
-    </ul>
+{% extends "layout.html" %}
 
-    {% if username == "KhunBall" %}
-        <h1>ยินดีต้อนรับเข้าสู่หน้า Admin</h1>
-        <img src="../static/picture2.jpg"  alt="" srcset="">
-    {% else %}
-        <h1>คุณไม่ใช้ Admin</h1>
-        <p>กรุณากลับหน้าแรก</p>
-        <a href="/">Home</a>
-    {% endif %}
-</body>
-</html>
+{% block content %}
+    <div class="container">
+        <h2>แบบฟอร์มติดต่อแอดมิน</h2>
+            <form action="{{url_for('signupForm')}}" method="GET">
+                <div class="form-group">
+                    <label for="">ชื่อผู้ติดต่อ</label>
+                    <input type="text" name="fname" id="" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="">รายละเอียด</label>
+                    <textarea name="description" class="form-control" cols="30" rows="10"></textarea>
+                </div>
+                <br>
+                <input type="submit" value="ส่งข้อมูล" class="btn btn-success">
+            </form>
+    </div>
+{% endblock %}

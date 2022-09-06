@@ -17,13 +17,17 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-              <a class="nav-link active" aria-current="page" href="/">หน้าแรก</a>
-              <a class="nav-link active" aria-current="page" href="/">สินค้า</a>
-              <a class="nav-link" href="/about">เกี่ยวกับเรา</a>
-              <a class="nav-link" href="/admin">ติดต่อแอดมิน</a>
+              <a class="nav-link active" aria-current="page" href="{{url_for('index')}}">หน้าแรก</a>
+              <a class="nav-link" href="{{url_for('about')}}">เกี่ยวกับเรา</a>
+              <a class="nav-link" href="{{url_for('admin')}}">ติดต่อแอดมิน</a>
+              <a class="nav-link" href="/admin">แฟนเฟจ</a>
             </div>
           </div>
         </div>
       </nav>
+      <main>
+        {% block content %}
+        {% endblock %}
+      </main>
 </body>
 </html>
