@@ -2,6 +2,39 @@
 
 {% block content %}
 
-<h1>Hello Homepage</h1>
+<div class="container my-2">
+    <form method="POST">
+        {{form.hidden_tag()}}
+        {{form.name.label}}
+        {{form.name()}}
+        <!-- Boolean Field -->
+        <br>
+        {{form.isAccept()}}
+        {{form.isAccept.label}}
+        <br>
+        <!-- Radio -->
+        {{form.gender.label}}
+        {{form.gender()}}
+        <br>
+        <!-- Select -->
+        {{form.skill.label}}
+        {{form.skill()}}
+        <br>
+        {{form.submit()}}
+    </form>
+    <hr>
+    {% if name %}
+        ชื่อของคุณ คือ <strong>{{name}}</strong>
+        <br>
+        ยอมรับบริการหรือไม่ ? <strong>{{isAccept}}</strong>
+        <br>
+        เพศ <strong>{{gender}}</strong>
+        <br>
+        ทักษะความสามารถ <strong>{{skill}}</strong>
+        <br>
+    {% else %}
+        ไม่พบข้อมูล
+    {% endif %}
+</div>
 
 {% endblock %}

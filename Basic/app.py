@@ -1,29 +1,35 @@
-from flask import Flask,render_template,request
+from flask import Flask,render_template, request
+from flask_wtf import FlaskForm
+from wtforms import StringField, SubmitField, BooleanField, RadioField, SelectField
+
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'mykey'
 
-@app.route('/')
+class MyForm(FlaskForm):
+    name = StringField("ป้อนชื่อของคุณ")
+    isAccept = BooleanField("ยอมรับเงื่อนไขบริการข้อมูล")
+    gender = RadioField('เพศ', choices=[('male', 'ชาย'), ('female', 'หญิง'), ('other', 'อื่นๆ')])
+    skill = SelectField('ความสามารถพิเศษ', choices=[('English', 'พูดภาษาอังกฤษ'), ('Sing', 'ร้องเพลง'), ('Game', 'เกม')])
+    submit = SubmitField("บันทึก")
+
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    data = {"name":"KhunBall", "age":28, "salary":"5000"}
-    return render_template("index.html", mydata = data)
-
-@app.route('/about')
-def about():
-    products = ["เสื้อผ้า", "เตารีด", "ผ้าห่ม", "ยาสามัญประจำบ้าน", "คีย์บอร์ด"]
-    return render_template("about.html", myproduct = products)
-
-@app.route('/admin')
-def admin():
-    # ชื่อ อายุ
-    username = "KhunBall"
-    return render_template("admin.html", username = username)
-
-@app.route('/sendData')
-def signupForm():
-    fname = request.args.get('fname')
-    description = request.args.get('description')
-    return render_template("thankyou.html", data = {"name": fname, "description": description})
+    name = False
+    isAccept = False
+    gender = False
+    skill = False
+    form = MyForm()
+    if form.validate_on_submit():
+        name = form.name.data
+        isAccept = form.isAccept.data
+        gender = form.gender.data
+        skill = form.skill.data
+        # ลบข้อมูลจากแบบฟอร์ม
+        form.name.data = ""
+        form.isAccept.data = ""
+        form.gender.data = ""
+    return render_template("index.html", form=form, name=name, isAccept=isAccept, gender=gender, skill=skill)
 
 if __name__ == '__main__':
     app.run(debug=True)
-
