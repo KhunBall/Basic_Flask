@@ -20,17 +20,24 @@
         {{form.skill.label}}
         {{form.skill()}}
         <br>
+        <!-- <Area> -->
+        {{form.address.label}}
+        <br>
+        {{form.address()}}
+        <br>
         {{form.submit()}}
     </form>
     <hr>
-    {% if name %}
-        ชื่อของคุณ คือ <strong>{{name}}</strong>
+    {% if session['name'] %}
+        ชื่อของคุณ คือ <strong>{{session['name']}}</strong>
         <br>
-        ยอมรับบริการหรือไม่ ? <strong>{{isAccept}}</strong>
+        ยอมรับบริการหรือไม่ ? <strong>{{session['isAccept']}}</strong>
         <br>
-        เพศ <strong>{{gender}}</strong>
+        เพศ <strong>{{session['gender']}}</strong>
         <br>
-        ทักษะความสามารถ <strong>{{skill}}</strong>
+        ทักษะความสามารถ <strong>{{session['skill']}}</strong>
+        <br>
+        ที่อยู่ <strong>{{session['address']}}</strong>
         <br>
     {% else %}
         ไม่พบข้อมูล
