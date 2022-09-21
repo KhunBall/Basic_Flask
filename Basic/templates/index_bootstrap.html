@@ -1,21 +1,32 @@
-{% import "bootstrap/wtf.html" as wtf %}
 {% extends "layout.html" %}
-
-{% block title %}
-    ยินดีต้อนรับเข้าสู่หน้าเว็บ
-{% endblock %}
 
 {% block content %}
 
 <div class="container my-2">
-    {% for messages in get_flashed_messages() %}
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{messages}}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    {% endfor %}
-
-    {{wtf.quick_form(form)}}
+    <form method="POST">
+        {{form.hidden_tag()}}
+        {{form.name.label}}
+        {{form.name(class="form-control")}}
+        <!-- Boolean Field -->
+        <br>
+        {{form.isAccept()}}
+        {{form.isAccept.label}}
+        <br>
+        <!-- Radio -->
+        {{form.gender.label}}
+        {{form.gender()}}
+        <br>
+        <!-- Select -->
+        {{form.skill.label}}
+        {{form.skill(class="form-control")}}
+        <br>
+        <!-- <Area> -->
+        {{form.address.label}}
+        <br>
+        {{form.address(class="form-control")}}
+        <br>
+        {{form.submit(class="btn btn-success")}}
+    </form>
     <hr>
     {% if session['name'] %}
         ชื่อของคุณ คือ <strong>{{session['name']}}</strong>
@@ -32,11 +43,5 @@
         ไม่พบข้อมูล
     {% endif %}
 </div>
-<script>
-    const btn = document.querySelector('.btn.btn-default');
-    btn.classList.remove('btn-default')
-    btn.classList.add('btn-success')
-    console.log(btn);
-</script>
 
 {% endblock %}

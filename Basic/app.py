@@ -1,11 +1,12 @@
-from flask import Flask,render_template, request, session
+from flask import Flask,render_template, request, session, flash
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, BooleanField, RadioField, SelectField, TextAreaField
 from wtforms.validators import DataRequired
-
+from flask_bootstrap import Bootstrap
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'mykey'
+Bootstrap(app)
 
 class MyForm(FlaskForm):
     name = StringField("ป้อนชื่อของคุณ", validators=[DataRequired()])
@@ -19,6 +20,7 @@ class MyForm(FlaskForm):
 def index():
     form = MyForm()
     if form.validate_on_submit():
+        flash("บันทึกข้อมูลเรียบร้อย")
         session['name'] = form.name.data
         session['isAccept'] = form.isAccept.data
         session['gender'] = form.gender.data
